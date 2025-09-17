@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User Profile | Laundry Management System</title>
-  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
-  <link rel="stylesheet" href="styles/profile.css"/>
+  <title>Admin Profile | Laundry Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles/adminprofile.css"/>
 </head>
 <body>
   <header>
     <h1>🧺 Smart Laundry Management System</h1>
     <nav>
-      <a href="userpricing.html">Pricing</a>
+      <a href="pricing.html">Pricing</a>
       <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact Us</a> <!-- ⭐ Contact link -->
+      <a href="contact.html">Contact Us</a>
     </nav>
   </header>
 
-  <main class="dashboard-container">
-    <aside class="sidebar">
-      <a href="userdashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-      <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
-      <a href="placeorder.html"><i class="fas fa-shopping-cart"></i> Place Order</a>
-      <a href="userorderhistory.html"><i class="fas fa-history"></i> Order History</a>
-      <a href="userreviews.html"><i class="fas fa-comments"></i> Reviews</a>
-      <a href="Usersettings.html"><i class="fas fa-cogs"></i> Settings</a>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <a href="admindashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="adminprofile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="userlist (1).html"><i class="fa-solid fa-users"></i> Users List</a>
+      <a href="orderhistory.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="paymenthistory.html"><i class="fa-solid fa-cash-register"></i> Payment History</a>
+      <a href="adminreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+      <a href="settingsadmin.html"><i class="fas fa-cogs"></i> Settings</a>
       <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-    </aside>
+    </div>
 
-    <section class="profile-container">
+    <div class="profile-container">
       <div class="profile-content">
         <div class="profile-header">
           <h1 class="profile-title"><i class="fas fa-user" style="margin-right: 10px;"></i>My Profile</h1>
-          <a href="editprofile.html">
-            <button class="edit-btn"><i class="fas fa-edit"></i> Edit Profile</button>
-          </a>
+        <a href="admineditprofile.html">
+  <button class="edit-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+  </a>
+
         </div>
 
         <div class="profile-section">
@@ -42,19 +44,19 @@
           <div class="profile-details">
             <div class="detail-item">
               <div class="detail-label">First Name</div>
-              <div class="detail-value">John</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Last Name</div>
-              <div class="detail-value">Doe</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Phone Number</div>
-              <div class="detail-value">+880123456789</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Date of Birth</div>
-              <div class="detail-value">1990-01-01</div>
+              <div class="detail-value"></div>
             </div>
           </div>
         </div>
@@ -64,15 +66,19 @@
           <div class="profile-details">
             <div class="detail-item">
               <div class="detail-label">Email Address</div>
-              <div class="detail-value">john.doe@example.com</div>
+              <div class="detail-value"></div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Alternate Email</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Present Address</div>
-              <div class="detail-value">Dhaka, Bangladesh</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Permanent Address</div>
-              <div class="detail-value">Chittagong, Bangladesh</div>
+              <div class="detail-value"></div>
             </div>
           </div>
         </div>
@@ -82,21 +88,21 @@
           <div class="profile-details">
             <div class="detail-item">
               <div class="detail-label">Education</div>
-              <div class="detail-value">B.Sc in Computer Science</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Occupation</div>
-              <div class="detail-value">Software Developer</div>
+              <div class="detail-value"></div>
             </div>
             <div class="detail-item">
               <div class="detail-label">Member Since</div>
-              <div class="detail-value">15 January 2022</div>
+              <div class="detail-value"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <footer class="main-footer">
     <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>

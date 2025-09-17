@@ -1,45 +1,57 @@
 <?php
-require 'connection.php'; // DB connection
+include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $full_name = $_POST["fullName"] ?? '';
-    $email = $_POST["email"] ?? '';
-    $password = $_POST["password"] ?? '';
-    $confirm_password = $_POST["confirmPassword"] ?? '';
-    $role = isset($_POST["role"]) ? (int)$_POST["role"] : 0;
+    $fullName = trim($_POST["fullName"]);
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirmPassword = $_POST["confirmPassword"];
+    $role = $_POST["role"];
 
-    // Password mismatch
-    if ($password !== $confirm_password) {
-        header("Location: ../front/register.html?error=password_mismatch");
-        exit;
+    // Password match check
+    if ($password !== $confirmPassword) {
+        echo "<script>alert('Passwords do not match!'); window.location.href='../front/register.html';</script>";
+        exit();
     }
 
-    // Sanitize
-    $full_name = htmlspecialchars($full_name, ENT_QUOTES);
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // Split full name into first and last
+    $nameParts = explode(" ", $fullName, 2);
+    $firstName = $nameParts[0];
+    $lastName = isset($nameParts[1]) ? $nameParts[1] : "";
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     try {
-        $stmt = $conn->prepare("INSERT INTO users (full_name, email, password, role) VALUES (:full_name, :email, :password, :role)");
-        $stmt->bindParam(":full_name", $full_name);
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $hashed_password);
-        $stmt->bindParam(":role", $role);
-        $stmt->execute();
+        $conn->beginTransaction();
 
-        // Registration successful → go to login page with success flag
-        header("Location: ../front/login.html?success=registered");
-        exit;
+        // Insert into sign_up
+        $stmt1 = $conn->prepare("INSERT INTO sign_up (first_name, last_name, email, password, role)
+                                 VALUES (:fname, :lname, :email, :password, :role)");
+        $stmt1->execute([
+            ':fname' => $firstName,
+            ':lname' => $lastName,
+            ':email' => $email,
+            ':password' => $hashedPassword,
+            ':role' => $role
+        ]);
 
-    } catch (PDOException $e) {
-        if ($e->getCode() == 23000) {
-            header("Location: ../front/register.html?error=email_exists");
-        } else {
-            echo "Error: " . $e->getMessage();
-        }
-        exit;
+        $user_id = $conn->lastInsertId();
+
+        // Insert into user_profile
+        $stmt2 = $conn->prepare("INSERT INTO user_profile (user_id, first_name, last_name, phone_number, address, profile_picture)
+                                 VALUES (:user_id, :fname, :lname, '', '', NULL)");
+        $stmt2->execute([
+            ':user_id' => $user_id,
+            ':fname' => $firstName,
+            ':lname' => $lastName
+        ]);
+
+        $conn->commit();
+
+        echo "<script> window.location.href='../front/login.html';</script>";
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo "Error: " . $e->getMessage();
     }
-} else {
-    echo "Invalid request method.";
 }
 ?>

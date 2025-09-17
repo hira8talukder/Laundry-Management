@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Reviews - Smart Laundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+header h1 {
+  font-size: 16px;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #039855;
+}
+
+.dashboard-container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #2c3e50;
+  padding-top: 30px;
+  color: white;
+  min-height: 100vh;
+}
+
+.sidebar a {
+  padding: 15px 30px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #34495e;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.main-content h1 {
+  margin-bottom: 20px;
+  color: #8540cf;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.review-header h1 {
+  font-size: 24px;
+}
+
+.sort-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-select label {
+  font-size: 14px;
+}
+
+.sort-select input[type="month"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.sort-select button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #6d80ec;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sort-select button:hover {
+  background-color: #472dbb;
+  transform: translateY(-1px);
+}
+
+.sort-select button:active {
+  background-color: #746edf;
+  transform: translateY(0);
+}
+
+/* Review box styles */
+.review-box {
+      background-color: #fefefe;
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .review-box .name {
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .review-box .course {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .review-box .rating {
+      color: #f1c40f;
+      font-weight: 600;
+    }
+
+    .review-box .review-text {
+      margin-top: 8px;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .review-box .date {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* === Add Review Form Styles === */
+.add-review-box {
+  background-color: #fefefe;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.add-review-box h2 {
+  color: #8540cf;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#rating {
+  width: 35%;
+}
+
+.submit-btn {
+  background: #4a90e2;
+    color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.submit-btn:hover {
+  background-color: #4a90e2;
+}
+
+/* Star rating styles */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.star-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#stars i {
+  color: #f1c40f;
+}
+
+/* Footer */
+footer {
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .sidebar a {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="userpricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <a href="userdashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="placeorder.html"><i class="fas fa-shopping-cart"></i> Place Order</a>
+      <a href="userorderhistory.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="userreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+      <a href="Usersettings.html"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </div>
+
+    <div class="main-content">
+      <div class="review-header">
+        <h1><i class="fa-solid fa-comments" style="margin-right: 10px;"></i>Reviews</h1>
+        <div class="sort-select">
+          <label for="monthPicker">Select Month:</label>
+          <input type="month" id="monthPicker">
+          <label><input type="checkbox" id="allCheckbox"> All</label>
+          <div class="sort-select">
+            <button onclick="filterReviews()"><i class="fa-solid fa-filter" style="margin-right: 5px;"></i>Filter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-review-box">
+        <h2>Add New Review</h2>
+        <form id="reviewForm">
+          <div class="form-group">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="service">Service:</label><br>
+            <select id="service" name="service" required>
+              <option value="">--Select--</option>
+              <option value="Dry Wash">Dry Wash</option>
+              <option value="Wash">Wash</option>
+              <option value="Iron">Iron</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating:</label>
+            <div class="star-rating">
+              <input type="range" id="rating" name="rating" min="0.5" max="5" step="0.5" value="5" oninput="updateStars(this.value)">
+              <div class="star-display">
+                <div class="stars" id="stars"></div>
+                <span id="rating-value">5.0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="review">Review:</label><br>
+            <textarea id="review" name="review" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date:</label><br>
+            <input type="text" id="date" name="date" readonly>
+          </div>
+
+          <button type="submit" class="submit-btn"><i class="fa-solid fa-plus"></i> Add Review</button>
+        </form>
+      </div>
+
+      <!-- Reviews will be added here -->
+      <div id="reviewsContainer"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript Section -->
+  <script>
+    function updateStars(value) {
+      const starsContainer = document.getElementById("stars");
+      const ratingValue = document.getElementById("rating-value");
+      starsContainer.innerHTML = "";
+
+      const fullStars = Math.floor(value);
+      const hasHalfStar = value % 1 !== 0;
+
+      for (let i = 0; i < 5; i++) {
+        if (i < fullStars) {
+          starsContainer.innerHTML += '<i class="fa-solid fa-star"></i>';
+        } else if (i === fullStars && hasHalfStar) {
+          starsContainer.innerHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+        } else {
+          starsContainer.innerHTML += '<i class="fa-regular fa-star"></i>';
+        }
+      }
+
+      ratingValue.textContent = parseFloat(value).toFixed(1);
+    }
+
+    function formatDate(dateObj) {
+      return dateObj.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function filterReviews() {
+      const isAll = document.getElementById("allCheckbox").checked;
+      const selectedMonth = document.getElementById("monthPicker").value;
+      const reviews = document.querySelectorAll(".review-box");
+
+      reviews.forEach((review) => {
+        const reviewDate = review.querySelector(".date").dataset.raw; // e.g. 2025-06-26
+        const reviewMonth = reviewDate.slice(0, 7);
+        if (isAll || reviewMonth === selectedMonth) {
+          review.style.display = "block";
+        } else {
+          review.style.display = "none";
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const today = new Date();
+      const formattedDate = formatDate(today);
+      document.getElementById("date").value = formattedDate;
+
+      updateStars(document.getElementById("rating").value);
+
+      // Enable/disable month input
+      document.getElementById("allCheckbox").addEventListener("change", () => {
+        document.getElementById("monthPicker").disabled = document.getElementById("allCheckbox").checked;
+      });
+
+      // Handle form submission
+      document.getElementById("reviewForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  fetch("../backend/submit_review.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(data => {
+    if (data.includes("success")) {
+      alert("Review added!");
+      location.reload();
+    } else if (data.includes("unauthorized")) {
+      alert("You must be logged in to submit a review.");
+    } else {
+      alert("Error submitting review: " + data);
+    }
+  });
+});
+
+      
+      // Fetch user-specific reviews
+fetch("../backend/get_user_reviews.php")
+  .then(res => res.json())
+  .then(reviews => {
+    reviews.forEach(r => {
+      const reviewHTML = `
+        <div class="review-box">
+          <div class="name">${r.name}</div>
+          <div class="course">${r.service}</div>
+          <div class="rating">${'★'.repeat(Math.floor(r.rating))}${(r.rating % 1 ? '½' : '')}</div>
+          <div class="review-text">${r.review_text}</div>
+          <div class="date" data-raw="${r.review_date}">${new Date(r.review_date).toLocaleDateString()}</div>
+        </div>
+      `;
+      document.getElementById("reviewsContainer").insertAdjacentHTML('beforeend', reviewHTML);
+    });
+  });
+
+    });
+  </script>
+</body>
+</html>

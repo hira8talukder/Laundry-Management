@@ -4,37 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="styles/payment.css" />
 </head>
 <body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="#">Pricing</a>
+      <a href="#">Blog</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+
   <div class="container">
     <header>
       <div class="illustration"></div>
-      <h1>Payment</h1>
+      <h1>Payment<i class="fa-solid fa-money-bill" style="margin-left: 10px;"></i></h1>
     </header>
 
     <main class="payment-box">
       <section class="order-summary">
         <h2>Order Summary</h2>
-        <div class="item">
-          <span>Wash</span>
-          <span>$120</span>
-        </div>
-        <div class="item">
-          <span>Dry Cleaning</span>
-          <span>$150</span>
-        </div>
-        <div class="item">
-          <span>Ironing</span>
-          <span>$40</span>
-        </div>
-        <div class="item">
-          <span>Delivery Charge</span>
-          <span>$40</span>
-        </div>
+        <div id="order-summary-items"></div>
         <div class="item total">
           <strong>Total</strong>
-          <strong>$310 BDT</strong>
+          <strong id="total-amount"></strong>
         </div>
       </section>
 
@@ -55,8 +50,80 @@
     </main>
 
     <footer>
-      <button class="pay-button">PAY NOW  $310</button>
+      <button class="pay-button" onclick="finalizePayment()">PAY NOW</button>
+      <button class="cancel-button" onclick="window.location.href='placeorder.html'">CANCEL</button>
     </footer>
   </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Load order data from localStorage
+    const customerName = localStorage.getItem('customer-name');
+    const address = localStorage.getItem('address');
+    const pickupType = localStorage.getItem('pickup-type');
+    const deliveryType = localStorage.getItem('delivery-type');
+    const grandTotal = localStorage.getItem('grand-total');
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+
+    // Update order summary UI
+    const summaryContainer = document.getElementById('order-summary-items');
+    const totalAmountElem = document.getElementById('total-amount');
+    let summaryHTML = '';
+
+    orders.forEach(order => {
+      summaryHTML += `
+        <div class="item">
+          <span>${order.product} (${order.service}) × ${order.quantity}</span>
+          <span>$${parseFloat(order.totalPrice).toFixed(2)}</span>
+        </div>`;
+    });
+
+    summaryHTML += `
+      <div class="item">
+        <span>Pickup: ${pickupType}</span>
+        <span></span>
+      </div>
+      <div class="item">
+        <span>Delivery: ${deliveryType}</span>
+        <span></span>
+      </div>
+      <div class="item">
+        <span>Address:</span>
+        <span>${address}</span>
+      </div>`;
+
+    summaryContainer.innerHTML = summaryHTML;
+    totalAmountElem.innerText = `$${grandTotal} BDT`;
+
+    function finalizePayment() {
+      const payload = {
+        customer_name: customerName,
+        address: address,
+        pickup_type: pickupType,
+        delivery_type: deliveryType,
+        grand_total: grandTotal,
+        orders: orders
+      };
+
+      fetch('process_payment.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.text())
+      .then(response => {
+        alert("Payment Successful! Your order has been placed.");
+        localStorage.clear();
+        window.location.href = 'confirmation.html'; // Or dashboard
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Payment failed. Please try again.");
+      });
+    }
+  </script>
 </body>
 </html>

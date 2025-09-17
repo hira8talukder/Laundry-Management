@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Add Income - Smart Laundry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f5f7fa;
+    }
+     .main-content h1 {
+    margin-bottom: 30px;
+    text-align: left;
+    color: #8540cf; /* pink */
+  }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2c3e50;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar a {
+      padding: 15px 30px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      background-color: #f5f7fa;
+    }
+
+    .search-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .search-section input[type="date"] {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .search-section button {
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .search-section button:hover {
+      background-color: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    .bottom-action {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .add-income-btn {
+      background-color: #2ecc71;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .add-income-btn:hover {
+      background-color: #27ae60;
+    }
+
+    footer {
+      background: #ffffff;
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid #e1e4e8;
+      font-size: 14px;
+      color: #888;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="pricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <a href="admindashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="adminprofile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="userlist (1).html"><i class="fa-solid fa-users"></i> Users List</a>
+      <a href="orderhistory.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="paymenthistory.html"><i class="fa-solid fa-cash-register"></i> Payment History</a>
+      <a href="adminreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+      <a href="settingsadmin.html"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </aside>
+
+    <main class="main-content">
+  <h1><i class="fa-solid fa-money-bill-trend-up" style="margin-right: 10px;"></i>Add Today's Income</h1>
+
+  <div class="search-section">
+    <input type="date" id="searchDate">
+    <button onclick="searchPaidOrders()">Search Paid Orders</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Total Payment</th>
+      </tr>
+    </thead>
+    <tbody id="orderTableBody">
+      <!-- Orders will be dynamically inserted here -->
+    </tbody>
+  </table>
+
+  <div class="bottom-action">
+    <button class="add-income-btn"><i class="fas fa-plus"></i> Add Incomes</button>
+  </div>
+</main>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Smart Laundry Management System. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleSelectAll(source) {
+      const checkboxes = document.querySelectorAll('.rowCheckbox');
+      checkboxes.forEach(cb => cb.checked = source.checked);
+    }
+
+    function searchPaidOrders() {
+      const date = document.getElementById('searchDate').value;
+      if (!date) {
+        alert("Please select a date.");
+        return;
+      }
+
+      const startTime = `${date} 10:00:00`;
+      const endTime = `${date} 22:00:00`;
+
+      // Fetch from backend PHP script
+      fetch(`get_paid_orders.php?start=${startTime}&end=${endTime}`)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById('orderTableBody');
+          tbody.innerHTML = '';
+          if (data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4">No paid orders found for selected time range.</td></tr>';
+            return;
+          }
+          data.forEach(order => {
+            const row = `
+              <tr>
+                <td><input type="checkbox" class="rowCheckbox"></td>
+                <td>${order.order_id}</td>
+                <td>${order.customer_name}</td>
+                <td>$${parseFloat(order.total_payment).toFixed(2)}</td>
+              </tr>`;
+            tbody.innerHTML += row;
+          });
+        })
+        .catch(err => {
+          console.error('Fetch error:', err);
+          alert('Failed to fetch data.');
+        });
+    }
+  </script>
+</body>
+</html>

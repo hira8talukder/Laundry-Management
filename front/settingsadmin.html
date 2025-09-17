@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Settings - Smart Laundry Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: #ffffff;
+      border-bottom: 1px solid #e1e4e8;
+    }
+
+    header h1 {
+      font-size: 18px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    nav a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2c3e50;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar a {
+      padding: 15px 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .main-content h1 {
+      margin-bottom: 30px;
+      text-align: left;
+      color: #8540cf;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .settings-section h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .settings-section label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .settings-section input, .settings-section select, .settings-section textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .settings-section button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .settings-section button:hover {
+      background-color: #2980b9;
+    }
+
+    .danger {
+      background-color: #ffe6e6;
+      border: 1px solid #ff4d4d;
+      color: #a94442;
+    }
+
+    footer {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .sidebar a {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="#">Pricing</a>
+      <a href="#">Blog</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <a href="admindashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="adminprofile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="userlist (1).html"><i class="fa-solid fa-users"></i> Users List</a>
+      <a href="orderhistory.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="paymenthistory.html"><i class="fa-solid fa-cash-register"></i> Payment History</a>
+      <a href="adminreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+      <a href="settingsadmin.html"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </aside>
+
+    <div class="main-content">
+      <h1><i class="fas fa-cogs"></i> Admin Settings</h1>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Profile Information</h2>
+        <label for="adminName">Full Name</label>
+        <input type="text" id="adminName" name="adminName" value="Admin Name" />
+
+        <label for="adminEmail">Email Address</label>
+        <input type="email" id="adminEmail" name="adminEmail" value="admin@example.com" />
+      </div>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Change Password</h2>
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" />
+
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" />
+
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" />
+
+        <button>Change Password</button>
+      </div>
+
+      <div class="settings-section danger">
+        <h2>Delete Account</h2>
+        <p>This action is irreversible. Once deleted, all admin data will be permanently removed.</p>
+        <label for="deleteReason">Reason for Deletion</label>
+        <textarea id="deleteReason" placeholder="Optional"></textarea>
+        <button style="background-color:#e74c3c">Delete Account</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Smart Laundry Management System. All rights reserved.
+  </footer>
+</body>
+</html>

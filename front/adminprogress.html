@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin In Progress - Smart Laundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1581579185169-53e13c7e7b08') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar .logo {
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .navbar .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #3498db;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2c3e50;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .sidebar a {
+      padding: 15px 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .main-content h1 {
+      margin-bottom: 30px;
+      text-align: left;
+      color: #8540cf; /* pink */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f4f6f8;
+    }
+
+    tr:hover {
+      background-color: #ecf0f1;
+    }
+    td:nth-child(4) {
+        padding-right: 70px; /* More space after "Total" column */
+    }
+
+    td:nth-child(5) {
+        padding-right: 5px; /* Slightly less space before "Status" */
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .sidebar a {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+    footer {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+    }
+    .payment {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.status-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.status-label {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: center;
+}
+
+
+.status-btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.status-btn.complete {
+  color: #00897b;
+  border-color: #00897b;
+  background-color: #e0f2f1;
+}
+
+.status-btn.complete:hover {
+  background-color: #b2dfdb;
+}
+
+
+.payment.paid {
+  color: white;
+  background-color: #4caf50;
+  border-radius: 12px;
+  padding: 5px 12px;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="pricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact Us</a> <!-- ⭐ Contact link -->
+    </nav>
+  </header>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <a href="admindashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="adminprofile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="userlist (1).html"><i class="fa-solid fa-users"></i> Users List</a>
+      <a href="orderhistory.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="paymenthistory.html"><i class="fa-solid fa-cash-register"></i> Payment History</a>
+      <a href="adminreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+      <a href="settingsadmin.html"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </div>
+
+    <div class="main-content">
+      <h1><i class="fa-solid fa-hourglass-end" style="margin-right: 10px;"></i>In Progress</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="status-buttons">
+                <button class="status-btn complete">Complete</button>
+              </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td><span class="payment paid">Paid</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="status-buttons">
+                <button class="status-btn complete">Complete</button>
+              </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td><span class="payment paid">Paid</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="status-buttons">
+                <button class="status-btn complete">Complete</button>
+              </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td><span class="payment paid">Paid</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>
+</footer>
+</body>
+</html>

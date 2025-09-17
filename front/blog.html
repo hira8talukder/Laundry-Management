@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Blog - Smart Laundry Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2c3e50;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar a {
+      padding: 15px 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px 56px;
+      background: #fff;
+      overflow-y: auto;
+    }
+
+    .main-heading h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #8540cf;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .blog-post {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background-color: #fafafa;
+      box-shadow: 0 3px 8px rgba(133, 64, 207, 0.1);
+      transition: box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .blog-post:hover {
+      box-shadow: 0 8px 20px rgba(133, 64, 207, 0.25);
+    }
+
+    .post-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid #8540cf;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .blog-post-content {
+      padding: 20px 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-post h2 {
+      color: #8540cf;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .blog-post .meta {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .blog-post p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .tags {
+      margin: 15px 0 10px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #e9d9ff;
+      color: #8540cf;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-right: 8px;
+      user-select: none;
+    }
+
+    .read-more-btn {
+      align-self: flex-start;
+      background-color: #8540cf;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
+      margin-top: auto;
+      box-shadow: 0 3px 6px rgba(133, 64, 207, 0.3);
+    }
+
+    .read-more-btn:hover {
+      background-color: #6b2fb5;
+    }
+
+    /* Pagination */
+    .pagination {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .pagination button {
+      background-color: #fff;
+      border: 2px solid #8540cf;
+      color: #8540cf;
+      font-weight: 600;
+      padding: 8px 16px;
+      margin: 0 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+
+    .pagination button:hover {
+      background-color: #8540cf;
+      color: white;
+    }
+
+    .pagination button.active {
+      background-color: #8540cf;
+      color: white;
+      cursor: default;
+    }
+
+    footer {
+      background: #ffffff;
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid #e1e4e8;
+      font-size: 14px;
+      color: #888;
+      margin-top: auto;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="#">Pricing</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="users_list.html"><i class="fa-solid fa-users"></i> Users List</a>
+      <a href="order_history.html"><i class="fas fa-history"></i> Order History</a>
+      <a href="payment_history.html"><i class="fa-solid fa-cash-register"></i> Payment History</a>
+      <a href="status.html"><i class="fa-solid fa-list-check"></i> Reviews</a>
+      <a href="settings.html"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </aside>
+
+    <main class="main-content">
+      <div class="main-heading">
+        <h1><i class="fas fa-blog"></i> Blog</h1>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-post">https
+          <img src="../images/fde5860a472b607dbc5955de3b4cd7c2.jpg" alt="Laundry Tips" class="post-image" />
+          <div class="blog-post-content">
+            <h2>5 Tips to Keep Your Laundry Fresh and Clean</h2>
+            <div class="meta">By Admin | June 20, 2025</div>
+            <p>
+              Keeping your laundry fresh and clean can be simple with the right habits. Regularly clean your washing machine, use the correct detergent amount, and avoid overloading to get the best results.
+            </p>
+            <div class="tags">
+              <span class="tag">Laundry</span>
+              <span class="tag">Tips</span>
+              <span class="tag">Cleaning</span>
+            </div>
+            <a href="#" class="read-more-btn">Read More &raquo;</a>
+          </div>
+        </article>
+
+        <article class="blog-post">
+          <img src="../images/03a63d2a8a0e7f8ef380a0223a18c1f2.jpg" alt="Eco-Friendly Detergents" class="post-image" />
+          <div class="blog-post-content">
+            <h2>Why Choose Eco-Friendly Laundry Detergents?</h2>
+            <div class="meta">By Admin | June 15, 2025</div>
+            <p>
+              Eco-friendly detergents are gentle on your clothes and the environment. Learn why switching to these products benefits you and helps reduce pollution.
+            </p>
+            <div class="tags">
+              <span class="tag">Eco-Friendly</span>
+              <span class="tag">Detergents</span>
+              <span class="tag">Environment</span>
+            </div>
+            <a href="#" class="read-more-btn">Read More &raquo;</a>
+          </div>
+        </article>
+
+        <article class="blog-post">
+          <img src="../images/6a33933ebdef44f01f48092bed4a2845 (1).jpg" alt="Laundry Symbols" class="post-image" />
+          <div class="blog-post-content">
+            <h2>Understanding Laundry Symbols on Your Clothes</h2>
+            <div class="meta">By Admin | June 10, 2025</div>
+            <p>
+              Laundry symbols can be confusing. This guide helps you understand what each symbol means so you can care for your garments properly.
+            </p>
+            <div class="tags">
+              <span class="tag">Laundry</span>
+              <span class="tag">Symbols</span>
+              <span class="tag">Care</span>
+            </div>
+            <a href="#" class="read-more-btn">Read More &raquo;</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button disab

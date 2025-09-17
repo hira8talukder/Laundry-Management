@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Settings - Smart Laundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1581579185169-53e13c7e7b08') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar .logo {
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .navbar .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #3498db;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2c3e50;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar a {
+      padding: 15px 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .main-content h1 {
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .settings-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .settings-section h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .settings-section label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .settings-section input, .settings-section select, .settings-section textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .settings-section button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .settings-section button:hover {
+      background-color: #2980b9;
+    }
+
+    .danger {
+      background-color: #ffe6e6;
+      border: 1px solid #ff4d4d;
+      color: #a94442;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .sidebar a {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+    footer {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="userpricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact Us</a> <!-- ⭐ Contact link -->
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <a href="userdashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    <a href="placeorder.html"><i class="fas fa-shopping-cart"></i> Place Order</a>
+    <a href="userorderhistory.html"><i class="fas fa-history"></i> Order History</a>
+    <a href="userreviews.html"><i class="fa-solid fa-comments"></i> Reviews</a>
+    <a href="Usersettings.html"><i class="fas fa-cogs"></i> Settings</a>
+    <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </div>
+
+    <div class="main-content">
+      <h1 style="color: #8540cf;"><i class="fa fa-cogs" style="margin-right: 10px;"></i>Settings</h1>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Change Password</h2>
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Current Password">
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="New Password">
+        <label for="confirm-password">Confirm New Password</label>
+        <input type="password" id="confirm-password" placeholder="Confirm Password">
+        <button>Change Password</button>
+      </div>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Notification Preferences</h2>
+        <label for="notifications">Receive Email Notifications</label>
+        <select id="notifications">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <label for="sms">Receive SMS Alerts</label>
+        <select id="sms">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <button>Update Preferences</button>
+      </div>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Two-Factor Authentication</h2>
+        <label for="2fa">Enable 2FA</label>
+        <select id="2fa">
+          <option value="off">Off</option>
+          <option value="on">On</option>
+        </select>
+        <button>Update 2FA Settings</button>
+      </div>
+
+      <div class="settings-section">
+        <h2 style="color: #8540cf;">Privacy Settings</h2>
+        <label for="profile-visibility">Profile Visibility</label>
+        <select id="profile-visibility">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+        <button>Update Privacy</button>
+      </div>
+
+      <div class="settings-section danger">
+        <h2>Delete Profile</h2>
+        <p>This action is irreversible. Once deleted, all your data will be permanently removed.</p>
+        <label for="delete-reason">Reason for Leaving</label>
+        <textarea id="delete-reason" placeholder="Optional"></textarea>
+        <button style="background-color:#e74c3c">Delete Profile</button>
+      </div>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,27 +1,59 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f7f8fd;
   margin: 0;
   padding: 0;
 }
+header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
 
 .container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
 }
+ .container > header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px; /* reduce spacing below */
+  margin-top: 10px;     /* add this to control top spacing */
+}
 
-header {
-  text-align: center;
-  margin-bottom: 20px;
+.container > header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 5px;  /* reduce top margin */
+  color: #000;
 }
 
 .illustration {
   background: url('https://img.icons8.com/ios-filled/100/000000/laundry.png') no-repeat center;
   background-size: contain;
-  height: 100px;
-  margin: auto;
+  height: 50px;        /* reduce height */
+  margin-bottom: 10px; /* reduce bottom spacing */
 }
+
 
 .payment-box {
   display: flex;
@@ -109,3 +141,24 @@ footer {
   border-radius: 10px;
   cursor: pointer;
 }
+.cancel-button {
+  padding: 15px 40px;
+  background-color: #f44336; /* Red color */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+footer {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+    }

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laundry Pricing List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 16px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    nav a:hover {
+      color: #039855;
+    }
+
+    .page-title {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 26px;
+      color: #444;
+    }
+
+    .pricing-table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      padding: 0 20px 60px;
+    }
+
+    .service-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      width: 300px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #4a90e2;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid #eaeaea;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    td {
+      color: #555;
+    }
+
+    .main-footer {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      .pricing-table {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .page-title {
+        font-size: 22px;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>🧺 Smart Laundry Management System</h1>
+    <nav>
+      <a href="userdashboard.html">Dashboard</a>
+      <a href="userpricing.html">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- Page Title -->
+  <h2 class="page-title" style="color:#8540cf ;">Service Pricing List</h2>
+
+  <!-- Pricing Table -->
+  <div class="pricing-table">
+    <!-- Dry Wash -->
+    <div class="service-card">
+      <div class="service-title">Dry Wash</div>
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Price ($)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Shirt</td><td>15</td></tr>
+          <tr><td>Pant</td><td>20</td></tr>
+          <tr><td>Blazer</td><td>150</td></tr>
+          <tr><td>Sari</td><td>100</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Iron -->
+    <div class="service-card">
+      <div class="service-title">Iron</div>
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Price ($)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Shirt</td><td>10</td></tr>
+          <tr><td>Pant</td><td>10</td></tr>
+          <tr><td>Blazer</td><td>50</td></tr>
+          <tr><td>Sari</td><td>20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Wash & Iron -->
+    <div class="service-card">
+      <div class="service-title">Wash & Iron</div>
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Price ($)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Shirt</td><td>20</td></tr>
+          <tr><td>Pant</td><td>25</td></tr>
+          <tr><td>Blazer</td><td>170</td></tr>
+          <tr><td>Sari</td><td>110</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>&copy; 2025 Smart Laundry Management System. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
